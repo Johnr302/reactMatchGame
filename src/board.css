@@ -1,0 +1,9 @@
+#board {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: lightblue;
+  border: 1px solid black;
+  width: 400px;
+  margin: 0 auto;
+  justify-content: center;
+}

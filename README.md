@@ -1,2 +1,0 @@
-# reactMatchGame
-Created with CodeSandbox
