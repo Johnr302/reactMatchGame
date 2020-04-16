@@ -4,7 +4,7 @@ import "./card.css";
 const cardArray = [
   {
     name: "suzuki",
-    img: "https://lh3.googleusercontent.com/proxy/HkcybRVgKTQqrkdfnEuPTjfxOM-DH-_Wl6rb6_7Or1TEQHJvlOeGk6OEWrEeW2QH1JHiduAojRsNisYBNlxmeK3a_iXcgXiyVaBiaB8SpTr02w3euGOb7HAwkXXWe7jBv-eTvMPwgUQguqZMn05BaX_j4U61pzTQHGe70wmJzdH0RVDynGKvUHDjwk76UWcFKiKbliQGVpu9ZZnSxjRAAdHWI6Xbwa4ce0m3PA"
+    img: "https://i0.wp.com/www.asphaltandrubber.com/wp-content/uploads/2020/02/2020-Suzuki-GSX-RR-MotoGP-scaled.jpg?fit=2560%2C1707&ssl="
   },
   {
     name: "yamaha",
@@ -15,11 +15,14 @@ const cardArray = [
     img: "https://3.bp.blogspot.com/-whgpj2_RpXE/XMlg16UnC3I/AAAAAAAAaok/6NGeYH2TfkQSJWfQ6VKqydywBe18Y4CigCLcBGAs/s1600/Mercenary%2BGarage%2BCustom%2BMotorcycle%2BWorkshop%2B%2BAkira%2BKaneda%2BBike%2BKitbash%2Bby%2BJames%2BQiu%2Bon%2BBehance%2B01.jpg"
   },
   {
-    name: "bmw",
+    name: "mt10",
     img: "https://dd5394a0b8ca8e97ba29-abf76f3d91a2125517d6c7c409f095c7.ssl.cf1.rackcdn.com/content/common/Models/2020/f0926b63-edba-41cf-9a31-70d23677dcbf.png"
   }
 ];
 
+/*
+  This will flip the card and check for matches
+*/
 const flipCard = (event) => {
   // flip the card
   // timer to delay actions
@@ -27,15 +30,17 @@ const flipCard = (event) => {
   // check for match
   // if march increase score and make images blank reset card chosen array
   //else flip cards back over 
-  alert('clicked', event.target)
+  console.log(event.currentTarget.getAttribute('data-id'))
 };
 
-const Card = () => {
+const Card = (props) => {
+  const {index} = props;
+
   return (
     <img 
-      data-id={cardArray[0].name} 
-      src={cardArray[0].img} 
-      class="card-container" 
+      data-id={cardArray[index].name} 
+      src={cardArray[index].img} 
+      className="card-container" 
       alt="" 
       onClick={flipCard}
     />

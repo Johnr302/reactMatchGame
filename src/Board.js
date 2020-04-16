@@ -8,7 +8,7 @@ const makeCards = num => {
   let results = [];
 
   for (let i = 0; i < num; i++) {
-    results.push(<Card />);
+    results.push(<Card key={i.toString()} index={i} />);
   }
   return results;
 };
