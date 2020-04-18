@@ -1,6 +1,10 @@
 import React from "react";
 import "./card.css";
 
+const blueBGurl =
+  "https://wallpapertag.com/wallpaper/middle/5/8/b/836279-plain-blue-screen-wallpaper-1920x1080-1920x1080-full-hd.jpg";
+
+let score = 0;
 const cardArray = [
   {
     name: "suzuki",
@@ -44,6 +48,16 @@ const cardArray = [
   },
 ];
 
+let isMatch = [];
+
+//this function takes an array two html elements
+const isMatchFound = (arrayEl) => {
+  // compares 2 sequential elements to see if the name matches and return boolean
+  return (
+    arrayEl[0].getAttribute("data-id") === arrayEl[1].getAttribute("data-id")
+  );
+};
+
 /*
   This will flip the card and check for matches
 */
@@ -53,11 +67,27 @@ const flipCard = (event) => {
   const cardId = el.getAttribute("data-id");
   const display = cardArray.find((element) => element.name === cardId);
   el.setAttribute("src", display.img);
-  // timer to delay actions
   // push to chose card array
+  isMatch.push(el);
+  console.log(isMatch);
   // check for match
-  // if march increase score and make images blank reset card chosen array
-  //else flip cards back over
+  if (isMatch.length === 2) {
+    if (isMatchFound(isMatch)) {
+      score += 1;
+      isMatch.forEach((element) =>
+        element.setAttribute(
+          "src",
+          "https://stayfurnished.com/skin/frontend/default/stylish/images/bg.png"
+        )
+      );
+      // if match increase score and make images white
+    } else {
+      isMatch.forEach((element) => element.setAttribute("src", blueBGurl));
+      ///else flip cards back over reset to blue
+    }
+    isMatch = [];
+  }
+  // timer to delay actions
   //console.log(event.currentTarget.getAttribute("data-id"));
 };
 
@@ -67,7 +97,7 @@ const Card = (props) => {
   return (
     <img
       data-id={cardArray[index].name}
-      src="https://wallpapertag.com/wallpaper/middle/5/8/b/836279-plain-blue-screen-wallpaper-1920x1080-1920x1080-full-hd.jpg"
+      src={blueBGurl}
       className="card-container"
       alt=""
       onClick={flipCard}
