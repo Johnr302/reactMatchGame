@@ -51,9 +51,8 @@ const flipCard = (event) => {
   // flip the card
   const el = event.currentTarget;
   const cardId = el.getAttribute("data-id");
-  const found = cardArray.find((element) => element.name === cardId);
-  console.log(found.img);
-  el.setAttribute("src", found.img);
+  const display = cardArray.find((element) => element.name === cardId);
+  el.setAttribute("src", display.img);
   // timer to delay actions
   // push to chose card array
   // check for match
