@@ -8,7 +8,7 @@ export default function App() {
     <div className="App">
       <h1>React - Memory Game</h1>
       <Score score="3" />
-      <Board numCards="4" />
+      <Board numCards="8" />
     </div>
   );
 }
