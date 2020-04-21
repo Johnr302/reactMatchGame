@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
+import ScoreContext from "../scoreContext";
 import "./card.css";
 
 const blueBGurl =
   "https://wallpapertag.com/wallpaper/middle/5/8/b/836279-plain-blue-screen-wallpaper-1920x1080-1920x1080-full-hd.jpg";
 
-let score = 0;
+const whiteUrl = "https://stayfurnished.com/skin/frontend/default/stylish/images/bg.png";
+
 const cardArray = [
   {
     name: "suzuki",
@@ -58,44 +60,54 @@ const isMatchFound = (arrayEl) => {
   );
 };
 
-/*
-  This will flip the card and check for matches
-*/
-const flipCard = (event) => {
-  // flip the card
-  const el = event.currentTarget;
-  const cardId = el.getAttribute("data-id");
-  const display = cardArray.find((element) => element.name === cardId);
-  el.setAttribute("src", display.img);
-  // push to chose card array
-  isMatch.push(el);
-  console.log(isMatch);
+// resets images
+// imageArr: array of images
+// url: URL to set src of each images in the array
+const resetImages = (imageArr, url) => {
+  imageArr.forEach((element) => element.setAttribute("src", url));
+};
 
-  // check for match
-  if (isMatch.length === 2) {
-    window.setTimeout(() => {
-      if (isMatchFound(isMatch)) {
-        score += 1;
-        isMatch.forEach((element) =>
-          element.setAttribute(
-            "src",
-            "https://stayfurnished.com/skin/frontend/default/stylish/images/bg.png"
-          )
-        );
-        // if match increase score and make images white
-      } else {
-        isMatch.forEach((element) => element.setAttribute("src", blueBGurl));
-        ///else flip cards back over reset to blue
-      }
-      isMatch = [];
-    }, 1000);
-  }
+// checks if cards match and adjusts score.
+// handle reset of cards
+const checkForMatch = (setScore) => {
   // timer to delay actions
-  //console.log(event.currentTarget.getAttribute("data-id"));
+  window.setTimeout(() => {
+    if (isMatchFound(isMatch)) {
+      // if match increase score 
+      setScore((prevValue) => prevValue + 1);
+
+      // and make images white
+      resetImages(isMatch, whiteUrl)
+    } else {
+      // else flip cards back over reset to blue
+      resetImages(isMatch, blueBGurl);
+    }
+
+    // reset matches array
+    isMatch = [];
+  }, 1000);
 };
 
 const Card = (props) => {
   const { index } = props;
+  const state = useContext(ScoreContext);
+
+  //  This will flip the card and check for matches
+  const flipCard = (event) => {
+    // flip the card
+    const el = event.currentTarget;
+    const cardId = el.getAttribute("data-id");
+    const display = cardArray.find((element) => element.name === cardId);
+    el.setAttribute("src", display.img);
+
+    // push to chose card array
+    isMatch.push(el);
+
+    // check for match
+    if (isMatch.length === 2) {
+      checkForMatch(state.setScore);
+    }
+  };
 
   return (
     <img
