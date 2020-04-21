@@ -70,22 +70,25 @@ const flipCard = (event) => {
   // push to chose card array
   isMatch.push(el);
   console.log(isMatch);
+
   // check for match
   if (isMatch.length === 2) {
-    if (isMatchFound(isMatch)) {
-      score += 1;
-      isMatch.forEach((element) =>
-        element.setAttribute(
-          "src",
-          "https://stayfurnished.com/skin/frontend/default/stylish/images/bg.png"
-        )
-      );
-      // if match increase score and make images white
-    } else {
-      isMatch.forEach((element) => element.setAttribute("src", blueBGurl));
-      ///else flip cards back over reset to blue
-    }
-    isMatch = [];
+    window.setTimeout(() => {
+      if (isMatchFound(isMatch)) {
+        score += 1;
+        isMatch.forEach((element) =>
+          element.setAttribute(
+            "src",
+            "https://stayfurnished.com/skin/frontend/default/stylish/images/bg.png"
+          )
+        );
+        // if match increase score and make images white
+      } else {
+        isMatch.forEach((element) => element.setAttribute("src", blueBGurl));
+        ///else flip cards back over reset to blue
+      }
+      isMatch = [];
+    }, 1000);
   }
   // timer to delay actions
   //console.log(event.currentTarget.getAttribute("data-id"));
