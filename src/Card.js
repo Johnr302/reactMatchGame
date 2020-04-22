@@ -1,5 +1,6 @@
 import React from "react";
 import "./card.css";
+import { ScoreConsumer } from "./scoreContext";
 
 const blueBGurl =
   "https://wallpapertag.com/wallpaper/middle/5/8/b/836279-plain-blue-screen-wallpaper-1920x1080-1920x1080-full-hd.jpg";
@@ -75,7 +76,11 @@ const flipCard = (event) => {
   if (isMatch.length === 2) {
     window.setTimeout(() => {
       if (isMatchFound(isMatch)) {
-        score += 1;
+        // <ScoreConsumer>
+        //   {(score) => {
+        //     return (score += 1);
+        //   }}
+        // </ScoreConsumer>;
         isMatch.forEach((element) =>
           element.setAttribute(
             "src",

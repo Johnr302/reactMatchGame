@@ -3,7 +3,7 @@ import Card from "./Card.js";
 import "./board.css";
 
 // makes number of cards passed in. Returns <Card /> component
-const makeCards = num => {
+const makeCards = (num) => {
   // num = number of cards
   let results = [];
 
@@ -13,7 +13,7 @@ const makeCards = num => {
   return results;
 };
 
-const Board = props => {
+const Board = (props) => {
   const { numCards } = props;
 
   return <section id="board">{makeCards(numCards)}</section>;
