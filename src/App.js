@@ -7,7 +7,7 @@ import "./styles.css";
 import { ScoreProvider } from "./scoreContext";
 
 export default function App() {
-  const [score, setScore] = useState(3);
+  const [score, setScore] = useState(0);
   return (
     <div className="App">
       <h1>React - Memory Game</h1>

@@ -62,9 +62,10 @@ const isMatchFound = (arrayEl) => {
 /*
   This will flip the card and check for matches
 */
-const flipCard = (event) => {
+const flipCard = (event, updateScore) => {
   // flip the card
   const el = event.currentTarget;
+  console.log(el);
   const cardId = el.getAttribute("data-id");
   const display = cardArray.find((element) => element.name === cardId);
   el.setAttribute("src", display.img);
@@ -76,11 +77,6 @@ const flipCard = (event) => {
   if (isMatch.length === 2) {
     window.setTimeout(() => {
       if (isMatchFound(isMatch)) {
-        // <ScoreConsumer>
-        //   {(score) => {
-        //     return (score += 1);
-        //   }}
-        // </ScoreConsumer>;
         isMatch.forEach((element) =>
           element.setAttribute(
             "src",
@@ -88,6 +84,7 @@ const flipCard = (event) => {
           )
         );
         // if match increase score and make images white
+        updateScore();
       } else {
         isMatch.forEach((element) => element.setAttribute("src", blueBGurl));
         ///else flip cards back over reset to blue
@@ -103,13 +100,19 @@ const Card = (props) => {
   const { index } = props;
 
   return (
-    <img
-      data-id={cardArray[index].name}
-      src={blueBGurl}
-      className="card-container"
-      alt=""
-      onClick={flipCard}
-    />
+    <ScoreConsumer>
+      {(value) => {
+        return (
+          <img
+            data-id={cardArray[index].name}
+            src={blueBGurl}
+            className="card-container"
+            alt=""
+            onClick={(event) => flipCard(event, value.updateScore)}
+          />
+        );
+      }}
+    </ScoreConsumer>
   );
 };
 
