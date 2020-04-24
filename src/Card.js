@@ -5,7 +5,6 @@ import { ScoreConsumer } from "./scoreContext";
 const blueBGurl =
   "https://wallpapertag.com/wallpaper/middle/5/8/b/836279-plain-blue-screen-wallpaper-1920x1080-1920x1080-full-hd.jpg";
 
-let score = 0;
 const cardArray = [
   {
     name: "suzuki",
