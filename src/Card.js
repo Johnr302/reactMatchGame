@@ -64,13 +64,13 @@ const isMatchFound = (arrayEl) => {
 const flipCard = (event, updateScore) => {
   // flip the card
   const el = event.currentTarget;
-  console.log(el);
+
   const cardId = el.getAttribute("data-id");
   const display = cardArray.find((element) => element.name === cardId);
   el.setAttribute("src", display.img);
+
   // push to chose card array
   isMatch.push(el);
-  console.log(isMatch);
 
   // check for match
   if (isMatch.length === 2) {
