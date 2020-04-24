@@ -1,9 +1,7 @@
 import React from "react";
 import { ScoreConsumer } from "./scoreContext";
 
-const Score = (props) => {
-  const { score } = props;
-
+const Score = () => {
   return (
     <ScoreConsumer>
       {(value) => {
