@@ -63,15 +63,18 @@ const isMatchFound = (arrayEl) => {
 */
 const flipCard = (event, updateScore) => {
   // flip the card
+  if (isMatch.length === 2) {
+    return;
+  }
   const el = event.currentTarget;
-
+  // const index = el.getAttribute("data-index");
   const cardId = el.getAttribute("data-id");
   const display = cardArray.find((element) => element.name === cardId);
   el.setAttribute("src", display.img);
-
-  // push to chose card array
-  isMatch.push(el);
-
+  if (!isMatch.find((element) => element === el)) {
+    // push to chose card array
+    isMatch.push(el);
+  }
   // check for match
   if (isMatch.length === 2) {
     window.setTimeout(() => {
@@ -107,6 +110,7 @@ const Card = (props) => {
             src={blueBGurl}
             className="card-container"
             alt=""
+            data-index={index}
             onClick={(event) => flipCard(event, value.updateScore)}
           />
         );
