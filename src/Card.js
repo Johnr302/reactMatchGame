@@ -62,13 +62,13 @@ const isMatchFound = (arrayEl) => {
 /*
   This will flip the card and check for matches
 */
-const flipCard = (event, updateScore) => {
+const flipCard = (event, value) => {
   const el = event.currentTarget;
   // disable click on matched cards
   if (matchesArray.indexOf(el.getAttribute("data-index")) !== -1) {
     return;
   }
-  // disabling tripple clicks
+  // disabling triple clicks
   if (isMatch.length === 2) {
     return;
   }
@@ -92,7 +92,7 @@ const flipCard = (event, updateScore) => {
           matchesArray.push(element.getAttribute("data-index"));
         });
         // if match increase score and make images white
-        updateScore();
+        value.updateScore();
       } else {
         isMatch.forEach((element) => element.setAttribute("src", blueBGurl));
         ///else flip cards back over reset to blue
@@ -117,7 +117,7 @@ const Card = (props) => {
             className="card-container"
             alt=""
             data-index={index}
-            onClick={(event) => flipCard(event, value.updateScore)}
+            onClick={(event) => flipCard(event, value)}
           />
         );
       }}

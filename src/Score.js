@@ -5,7 +5,11 @@ const Score = () => {
   return (
     <ScoreConsumer>
       {(value) => {
-        return <h2>Score: {value.score}</h2>;
+        if (value.win === false) {
+          return <h2>Matches: {value.score}</h2>;
+        } else {
+          return <h2>Congratulations you win!</h2>;
+        }
       }}
     </ScoreConsumer>
   );
