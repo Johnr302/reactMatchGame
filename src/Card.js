@@ -49,6 +49,7 @@ const cardArray = [
 ];
 
 let isMatch = [];
+let matchesArray = [];
 
 //this function takes an array two html elements
 const isMatchFound = (arrayEl) => {
@@ -62,11 +63,15 @@ const isMatchFound = (arrayEl) => {
   This will flip the card and check for matches
 */
 const flipCard = (event, updateScore) => {
-  // flip the card
+  const el = event.currentTarget;
+  // disable click on matched cards
+  if (matchesArray.indexOf(el.getAttribute("data-index")) !== -1) {
+    return;
+  }
+  // disabling tripple clicks
   if (isMatch.length === 2) {
     return;
   }
-  const el = event.currentTarget;
   // const index = el.getAttribute("data-index");
   const cardId = el.getAttribute("data-id");
   const display = cardArray.find((element) => element.name === cardId);
@@ -79,12 +84,13 @@ const flipCard = (event, updateScore) => {
   if (isMatch.length === 2) {
     window.setTimeout(() => {
       if (isMatchFound(isMatch)) {
-        isMatch.forEach((element) =>
+        isMatch.forEach((element) => {
           element.setAttribute(
             "src",
             "https://stayfurnished.com/skin/frontend/default/stylish/images/bg.png"
-          )
-        );
+          );
+          matchesArray.push(element.getAttribute("data-index"));
+        });
         // if match increase score and make images white
         updateScore();
       } else {

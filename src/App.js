@@ -20,7 +20,7 @@ export default function App() {
         }}
       >
         <Score />
-        <Board numCards="6" />
+        <Board numCards="8" />
       </ScoreProvider>
     </div>
   );
