@@ -1,5 +1,5 @@
 import React from "react";
-import { ScoreConsumer } from "./scoreContext";
+import { ScoreConsumer } from "../scoreContext";
 
 const Score = () => {
   return (
