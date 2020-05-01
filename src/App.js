@@ -10,6 +10,7 @@ export default function App() {
   const [score, setScore] = useState(0);
   const [win, setWin] = useState(false);
   const [appKey, setAppKey] = useState(0);
+  const [matchesArray, setMatchesArray] = useState([]);
 
   return (
     <div className="App" key={appKey}>
@@ -25,14 +26,19 @@ export default function App() {
               setWin(true);
             }
           },
+          updateMatchesArray: (val) => {
+            let tempArray = matchesArray.push(val);
+            setMatchesArray(tempArray);
+          },
           numCards: numCards,
           win: win,
           resetGame: () => {
             setAppKey(appKey + 1);
             setWin(false);
             setScore(0);
+            setMatchesArray([]);
           },
-          matchesArray: [],
+          matchesArray: matchesArray,
         }}
       >
         <Score />

@@ -19,6 +19,7 @@ const isMatchFound = (arrayEl) => {
 const flipCard = (event, value) => {
   const el = event.currentTarget;
   // disable click on matched cards
+  //console.log(value.matchesArray.indexOf(el.getAttribute("data-index")) !== -1);
   if (value.matchesArray.indexOf(el.getAttribute("data-index")) !== -1) {
     return;
   }
@@ -28,10 +29,13 @@ const flipCard = (event, value) => {
   }
   // const index = el.getAttribute("data-index");
   const cardId = el.getAttribute("data-id");
-  const display = constants.cardArray.find((element) => element.name === cardId);
+  const display = constants.cardArray.find(
+    (element) => element.name === cardId
+  );
   el.setAttribute("src", display.img);
   if (!isMatch.find((element) => element === el)) {
     // push to chose card array
+
     isMatch.push(el);
   }
   // check for match
@@ -43,12 +47,15 @@ const flipCard = (event, value) => {
             "src",
             "https://stayfurnished.com/skin/frontend/default/stylish/images/bg.png"
           );
-          value.matchesArray.push(element.getAttribute("data-index"));
+          value.updateMatchesArray(element.getAttribute("data-index"));
+          //console.log(value.matchesArray);
         });
         // if match increase score and make images white
         value.updateScore();
       } else {
-        isMatch.forEach((element) => element.setAttribute("src", constants.blueBGurl));
+        isMatch.forEach((element) =>
+          element.setAttribute("src", constants.blueBGurl)
+        );
         ///else flip cards back over reset to blue
       }
       isMatch = [];
