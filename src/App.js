@@ -27,8 +27,9 @@ export default function App() {
             }
           },
           updateMatchesArray: (val) => {
-            let tempArray = matchesArray.push(val);
-            setMatchesArray(tempArray);
+            setMatchesArray((prevVal) => {
+              return [...prevVal, val];
+            });
           },
           numCards: numCards,
           win: win,
