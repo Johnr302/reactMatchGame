@@ -9,6 +9,7 @@ let numCards = 8;
 export default function App() {
   const [score, setScore] = useState(0);
   const [win, setWin] = useState(false);
+  const [isGameInitialized, setIsGameInitialized] = useState(false);
   const [appKey, setAppKey] = useState(0);
   const [matchesArray, setMatchesArray] = useState([]);
 
@@ -31,7 +32,6 @@ export default function App() {
               return [...prevVal, val];
             });
           },
-          numCards: numCards,
           win: win,
           resetGame: () => {
             setAppKey(appKey + 1);
@@ -40,10 +40,12 @@ export default function App() {
             setMatchesArray([]);
           },
           matchesArray: matchesArray,
+          isGameInitialized: isGameInitialized,
+          setIsGameInitialized: setIsGameInitialized,
         }}
       >
         <Score />
-        <Board numCards={numCards} />
+        <Board />
       </ScoreProvider>
     </div>
   );

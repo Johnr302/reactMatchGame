@@ -1,5 +1,6 @@
 import React from "react";
 import Card from "./Card.js";
+import { ScoreConsumer } from "../scoreContext";
 import "./board.css";
 
 // random int function
@@ -25,22 +26,35 @@ const randomizeArray = (num) => {
 };
 
 // makes number of cards passed in. Returns <Card /> component
-const makeCards = (num) => {
-  // num = number of cards
+const makeCards = (num, value) => {
   let randomArray = randomizeArray(num);
   let results = [];
+
   for (let i = 0; i < randomArray.length; i++) {
     results.push(
       <Card key={randomArray[i].toString()} index={randomArray[i]} />
     );
   }
+
+  console.log("making cards");
+
   return results;
 };
 
-const Board = (props) => {
-  const { numCards } = props;
+const Board = () => {
+  let numCards = 8;
 
-  return <section id="board">{makeCards(numCards)}</section>;
+  return (
+    <ScoreConsumer>
+      {(value) => {
+        return (
+          <section id="board">
+            {value.isGameInitialized === false && makeCards(numCards, value)}
+          </section>
+        );
+      }}
+    </ScoreConsumer>
+  );
 };
 
 export default Board;
