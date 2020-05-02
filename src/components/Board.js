@@ -26,7 +26,7 @@ const randomizeArray = (num) => {
 };
 
 // makes number of cards passed in. Returns <Card /> component
-const makeCards = (num, value) => {
+const makeCards = (num) => {
   let randomArray = randomizeArray(num);
   let results = [];
 
@@ -41,15 +41,15 @@ const makeCards = (num, value) => {
   return results;
 };
 
+let numCards = 8;
+let cards = makeCards(numCards);
 const Board = () => {
-  let numCards = 8;
-
   return (
     <ScoreConsumer>
       {(value) => {
         return (
           <section id="board">
-            {value.isGameInitialized === false && makeCards(numCards, value)}
+            {value.win ? (cards = makeCards(numCards)) : cards}
           </section>
         );
       }}
