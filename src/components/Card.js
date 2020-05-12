@@ -5,7 +5,8 @@ import constants from "./constants.js";
 
 let isMatch = [];
 
-//this function takes an array two html elements
+// This function takes an array two html elements
+// Returns: boolean - true if match found, false otherwise
 const isMatchFound = (arrayEl) => {
   // compares 2 sequential elements to see if the name matches and return boolean
   return (
@@ -13,9 +14,9 @@ const isMatchFound = (arrayEl) => {
   );
 };
 
-/*
-  This will flip the card and check for matches
-*/
+/*z
+    This will flip the card and check for matches
+  */
 const flipCard = (event, value) => {
   const el = event.currentTarget;
   // disable click on matched cards
@@ -86,4 +87,4 @@ const Card = (props) => {
   );
 };
 
-export default Card;
+export { isMatchFound, Card };
