@@ -15,7 +15,7 @@ export default function App() {
 
   return (
     <div className="App" key={appKey}>
-      <h1>React - Memory Game</h1>
+      <h1>Memory Game</h1>
       <ScoreProvider
         value={{
           score: score,
