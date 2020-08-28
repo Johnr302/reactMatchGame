@@ -41,7 +41,7 @@ const makeCards = (num) => {
   return results;
 };
 
-let numCards = 8;
+let numCards = 12;
 let cards = makeCards(numCards);
 const Board = () => {
   return (

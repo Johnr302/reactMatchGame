@@ -5,7 +5,7 @@ import Board from "./components/Board";
 import "./styles.css";
 // import score
 import { ScoreProvider } from "./scoreContext";
-let numCards = 8;
+let numCards = 12;
 export default function App() {
   const [score, setScore] = useState(0);
   const [win, setWin] = useState(false);
