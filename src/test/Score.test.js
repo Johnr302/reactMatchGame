@@ -14,7 +14,19 @@ describe("<Score />", () => {
         <Score />
       </ScoreProvider>
     );
+    expect(wrapper.text()).toEqual("Matches: 1");
+    expect(wrapper.find("h2")).toHaveLength(1);
 
-    console.warn(wrapper.debug());
+    // console.warn(wrapper.debug());
+  });
+
+  it("", () => {
+    const wrapper = mount(
+      <ScoreProvider value={{ win: true, score: 1, resetGame: () => {} }}>
+        <Score />
+      </ScoreProvider>
+    );
+    expect(wrapper.text()).toEqual("Congratulations you win!Reset");
+    expect(wrapper.find("h2")).toHaveLength(1);
   });
 });
