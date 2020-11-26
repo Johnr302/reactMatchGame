@@ -1,4 +1,18 @@
-import { isMatchFound } from "./Card.js";
+import React from "react";
+import Enzyme, { mount } from "enzyme";
+
+import { Card, isMatchFound } from "../components/Card";
+import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
+
+Enzyme.configure({ adapter: new Adapter() });
+const index = 1;
+describe("<Card />", () => {
+  it("renders <Card /> component", () => {
+    const wrapper = mount(<Card index={index} />);
+    // console.warn(wrapper.debug());
+    expect(wrapper.find("Card")).toHaveLength(1);
+  });
+});
 
 describe("testing card matching logic", () => {
   // has matching html elements
@@ -28,7 +42,7 @@ describe("testing card matching logic", () => {
     expect(isMatchFound(arr)).toBeTruthy();
   });
   it("returns false if ids do not match", () => {
-    // expect(isMatchFound(arr2)).toBe(false);
-    expect(isMatchFound(arr2)).toBeFalsy();
+    expect(isMatchFound(arr2)).toBe(false);
+    // expect(isMatchFound(arr2)).toBeFalsy();
   });
 });
