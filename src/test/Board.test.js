@@ -1,16 +1,24 @@
 import React from "react";
-import Enzyme, { shallow, mount } from "enzyme";
+import Enzyme, { mount } from "enzyme";
 
-import Board from "../components/Board";
-import { ScoreConsumer } from "../scoreContext";
+import { Board, makeCards } from "../components/Board";
+import { ScoreProvider } from "../scoreContext";
 
 import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
 
 Enzyme.configure({ adapter: new Adapter() });
 
 describe("Board", () => {
-  it("", () => {
-    // const wrapper = mount(<Board />);
-    // console.warn(wrapper);
+  it("renders a <Board /> component", () => {
+    const wrapper = mount(
+      <ScoreProvider value={{ win: false }}>
+        <Board />
+      </ScoreProvider>
+    );
+    expect(wrapper.find("#board")).toHaveLength(1);
+  });
+
+  it("has a makeCards method that returns an array of 12 <Card /> components", () => {
+    expect(makeCards(12)).toHaveLength(12);
   });
 });
