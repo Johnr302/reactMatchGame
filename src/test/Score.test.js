@@ -18,7 +18,7 @@ describe("<Score />", () => {
     expect(wrapper.find("h2")).toHaveLength(1);
   });
 
-  it("", () => {
+  it("renders a <Score /> component with a Congrats <h2/> when the game is complete", () => {
     const wrapper = mount(
       <ScoreProvider value={{ win: true, score: 1, resetGame: () => {} }}>
         <Score />
