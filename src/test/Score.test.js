@@ -24,7 +24,7 @@ describe("<Score />", () => {
         <Score />
       </ScoreProvider>
     );
-    expect(wrapper.text()).toEqual("Congratulations you win!Reset");
+    expect(wrapper.find("h2").text()).toEqual("Congratulations you win!");
     expect(wrapper.find("h2")).toHaveLength(1);
   });
 });
