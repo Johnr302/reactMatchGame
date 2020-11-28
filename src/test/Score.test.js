@@ -16,8 +16,6 @@ describe("<Score />", () => {
     );
     expect(wrapper.text()).toEqual("Matches: 1");
     expect(wrapper.find("h2")).toHaveLength(1);
-
-    // console.warn(wrapper.debug());
   });
 
   it("", () => {
