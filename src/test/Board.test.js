@@ -2,6 +2,7 @@ import React from "react";
 import Enzyme, { mount, shallow } from "enzyme";
 
 import { Board, makeCards } from "../components/Board";
+import { Card } from "../components/Card";
 
 import { ScoreProvider } from "../scoreContext";
 
@@ -23,14 +24,6 @@ describe("Board", () => {
     let result = makeCards(12);
     const wrapper = mount(result[0]);
     expect(result).toHaveLength(12);
-    console.warn(result[0]);
-    // expect(result[0]).toEqual(
-    //   expect.objectContaining({ type: "[(Function: Card)]" })
-    // );
-    // expect(result[0]).toEqual(expect.find(Card).toHaveLength(1));
-    console.warn(wrapper);
-    expect(wrapper.find("function")).toHaveLength(0);
-    // const wrapper = mount(makeCards(1));
-    // console.warn(wrapper);
+    expect(wrapper.find(Card)).toHaveLength(1);
   });
 });
