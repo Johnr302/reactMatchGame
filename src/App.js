@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 // import React, { Component } from "react";
 import Score from "./components/Score";
-import Board from "./components/Board";
+import { Board } from "./components/Board";
 import "./styles.css";
 // import score
 import { ScoreProvider } from "./scoreContext";

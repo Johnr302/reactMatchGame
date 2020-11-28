@@ -20,7 +20,6 @@ const isMatchFound = (arrayEl) => {
 const flipCard = (event, value) => {
   const el = event.currentTarget;
   // disable click on matched cards
-  //console.log(value.matchesArray.indexOf(el.getAttribute("data-index")) !== -1);
   if (value.matchesArray.indexOf(el.getAttribute("data-index")) !== -1) {
     return;
   }
@@ -28,7 +27,6 @@ const flipCard = (event, value) => {
   if (isMatch.length === 2) {
     return;
   }
-  // const index = el.getAttribute("data-index");
   const cardId = el.getAttribute("data-id");
   const display = constants.cardArray.find(
     (element) => element.name === cardId
@@ -49,21 +47,20 @@ const flipCard = (event, value) => {
             "https://stayfurnished.com/skin/frontend/default/stylish/images/bg.png"
           );
           value.updateMatchesArray(element.getAttribute("data-index"));
-          //console.log(value.matchesArray);
         });
         // if match increase score and make images white
         value.updateScore();
       } else {
+        // else flip cards back over reset to blue
         isMatch.forEach((element) =>
           element.setAttribute("src", constants.blueBGurl)
         );
-        ///else flip cards back over reset to blue
       }
+      // reset array to check for matches
       isMatch = [];
+      // timer to delay actions
     }, 1000);
   }
-  // timer to delay actions
-  //console.log(event.currentTarget.getAttribute("data-id"));
 };
 
 const Card = (props) => {

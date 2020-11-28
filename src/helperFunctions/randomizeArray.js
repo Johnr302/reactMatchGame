@@ -1,10 +1,6 @@
-// random int function
-function getRandomInt(max) {
-  return Math.floor(Math.random() * Math.floor(max));
-}
+import getRandomInt from "./getRandomInt";
 
 // randomize array
-
 const randomizeArray = (num) => {
   let results = [];
   let tempArray = [];

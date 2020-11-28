@@ -17,8 +17,6 @@ const makeCards = (num) => {
     );
   }
 
-  console.log("making cards");
-
   return results;
 };
 
@@ -38,4 +36,4 @@ const Board = () => {
   );
 };
 
-export default Board;
+export { Board, makeCards };
