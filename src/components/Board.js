@@ -2,7 +2,7 @@ import React from "react";
 import { Card } from "./Card.js";
 import { ScoreConsumer } from "../scoreContext";
 
-import randomizeArray from "../helperFunctions/randomizeArray";
+import randomizeArray from "../helpers/randomizeArray";
 
 import "./board.css";
 
