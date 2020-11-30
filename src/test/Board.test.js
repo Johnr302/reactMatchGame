@@ -1,9 +1,8 @@
 import React from "react";
-import Enzyme, { mount, shallow } from "enzyme";
+import Enzyme, { mount } from "enzyme";
 
 import { Board, makeCards } from "../components/Board";
 import { Card } from "../components/Card";
-
 import { ScoreProvider } from "../scoreContext";
 
 import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
