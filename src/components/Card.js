@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import "./card.css";
 import { ScoreConsumer } from "../scoreContext";
-import constants from "./constants.js";
+import { CARD_DATA, CARDSTATE } from "../CARD_DATA.js";
 import flipCard2 from "../helpers/flipCard2";
 
 let isMatch = [];
+
+let constants = CARD_DATA;
 
 // This function takes an array two html elements
 // Returns: boolean - true if match found, false otherwise
@@ -29,9 +31,7 @@ const flipCard = (event, value) => {
     return;
   }
   const cardId = el.getAttribute("data-id");
-  const display = constants.cardArray.find(
-    (element) => element.name === cardId
-  );
+  const display = constants.find((element) => element.name === cardId);
   el.setAttribute("src", display.img);
   if (!isMatch.find((element) => element === el)) {
     // push to chose card array
@@ -65,29 +65,33 @@ const flipCard = (event, value) => {
 };
 
 const Card = (props) => {
-  const { index } = props;
-  const [isFlipped, setIsFlipped] = useState(false);
+  const { index, flipCardClickHandler, cardState } = props;
+  // const [isFlipped, setIsFlipped] = useState(false);
   const [image, setImage] = useState(constants.blueBGurl);
+  // const id = constants.cardArray[index].name;
 
-  const dataId = constants.cardArray[index].name;
-  const flippedImageUrl = constants.cardArray[index].img;
+  // const [dataId, setDataId] = useState(id);
+
+  // const flippedImageUrl = constants.cardArray[index].img;
 
   return (
     <ScoreConsumer>
       {(value) => {
         return (
           <img
-            data-id={dataId}
             src={image}
             className="card-container"
             alt=""
             index={index}
-            onClick={(event) => {
+            cardState={cardState}
+            onClick={
+              flipCardClickHandler
+              // {
               //flipCard2(event, value);
-              setIsFlipped(true);
-              setImage(flippedImageUrl);
-            }}
-            isFlipped={isFlipped}
+              // setIsFlipped(true);
+              // setImage(flippedImageUrl);
+              // }
+            }
           />
         );
       }}

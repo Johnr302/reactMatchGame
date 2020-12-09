@@ -3,8 +3,9 @@ import React, { useState } from "react";
 import Score from "./components/Score";
 import { Board } from "./components/Board";
 import "./styles.css";
-// import score
 import { ScoreProvider } from "./scoreContext";
+import { CARD_DATA, CARDSTATE } from "./CARD_DATA";
+
 let numCards = 12;
 export default function App() {
   const [score, setScore] = useState(0);
@@ -12,6 +13,11 @@ export default function App() {
   const [isGameInitialized, setIsGameInitialized] = useState(false);
   const [appKey, setAppKey] = useState(0);
   const [matchesArray, setMatchesArray] = useState([]);
+
+  //New code
+  const [shuffledCards, setShuffledCards] = useState();
+
+  // New code
 
   return (
     <div className="App" key={appKey}>
@@ -45,7 +51,7 @@ export default function App() {
         }}
       >
         <Score />
-        <Board />
+        <Board data={CARD_DATA} />
       </ScoreProvider>
     </div>
   );
