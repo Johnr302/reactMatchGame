@@ -1,14 +1,32 @@
 import React, { useState } from "react";
-// import React, { Component } from "react";
 import Score from "./components/Score";
 import { Board } from "./components/Board";
 import "./styles.css";
 import { ScoreProvider } from "./scoreContext";
-import { CARD_DATA, CARDSTATE } from "./CARD_DATA";
+import { CARD_STATE, CARD_DATA, CARD_IMG } from "./card-constants";
+import { nanoid } from "nanoid";
+import randomizeArray from "./helpers/randomizeArray";
 
-let numCards = 12;
+// makes number of cards passed in. Returns <Card /> component
+const makeCards = (data) => {
+  let randomArray = randomizeArray(data.length);
+
+  let results = randomArray.map((index) => {
+    return {
+      id: `card-${nanoid()}`,
+      name: data[index].name,
+      frontImg: data[index].front,
+      backImg: CARD_IMG.BACK,
+      blankImg: CARD_IMG.BLANK,
+      showingImg: CARD_IMG.BACK,
+      status: CARD_STATE.FACEDOWN,
+    };
+  });
+
+  return results;
+};
+
 export default function App() {
-  const [score, setScore] = useState(0);
   const [win, setWin] = useState(false);
   const [isGameInitialized, setIsGameInitialized] = useState(false);
   const [appKey, setAppKey] = useState(0);
@@ -18,6 +36,26 @@ export default function App() {
   const [shuffledCards, setShuffledCards] = useState();
 
   // New code
+  const flipCardClickHandler = (event, id) => {
+    let updatedCards = cards.map((card) => {
+      if (card.id === id) {
+        card.status = CARD_STATE.FACEUP;
+        card.showingImg = card.frontImg;
+        return card;
+      }
+      return card;
+    });
+
+    setCards(updatedCards);
+  };
+
+  const [cards, setCards] = useState(makeCards(CARD_DATA));
+
+  console.log("cards", cards);
+
+  const [score, setScore] = useState(
+    cards.filter((card) => card.status === CARD_STATE.MATCHED).length / 2
+  );
 
   return (
     <div className="App" key={appKey}>
@@ -28,10 +66,6 @@ export default function App() {
           updateScore: () => {
             let updatedScore = score + 1;
             setScore(updatedScore);
-
-            if (updatedScore === numCards / 2) {
-              setWin(true);
-            }
           },
           updateMatchesArray: (val) => {
             setMatchesArray((prevVal) => {
@@ -50,8 +84,8 @@ export default function App() {
           setIsGameInitialized: setIsGameInitialized,
         }}
       >
-        <Score />
-        <Board data={CARD_DATA} />
+        <Score score={score} />
+        <Board cards={cards} flipCardClickHandler={flipCardClickHandler} />
       </ScoreProvider>
     </div>
   );

@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import "./card.css";
 import { ScoreConsumer } from "../scoreContext";
-import { CARD_DATA, CARDSTATE } from "../CARD_DATA.js";
-import flipCard2 from "../helpers/flipCard2";
+import { CARD_DATA, CARD_STATE } from "../card-constants.js";
 
 let isMatch = [];
 
@@ -65,32 +64,20 @@ const flipCard = (event, value) => {
 };
 
 const Card = (props) => {
-  const { index, flipCardClickHandler, cardState } = props;
-  // const [isFlipped, setIsFlipped] = useState(false);
-  const [image, setImage] = useState(constants.blueBGurl);
-  // const id = constants.cardArray[index].name;
-
-  // const [dataId, setDataId] = useState(id);
-
-  // const flippedImageUrl = constants.cardArray[index].img;
+  const { id, flipCardClickHandler, imgSrc, status } = props;
 
   return (
     <ScoreConsumer>
       {(value) => {
         return (
           <img
-            src={image}
+            src={imgSrc}
             className="card-container"
             alt=""
-            index={index}
-            cardState={cardState}
             onClick={
-              flipCardClickHandler
-              // {
-              //flipCard2(event, value);
-              // setIsFlipped(true);
-              // setImage(flippedImageUrl);
-              // }
+              status === CARD_STATE.FACEDOWN
+                ? (event) => flipCardClickHandler(event, id)
+                : undefined
             }
           />
         );

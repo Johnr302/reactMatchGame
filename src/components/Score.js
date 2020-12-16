@@ -1,12 +1,13 @@
 import React from "react";
 import { ScoreConsumer } from "../scoreContext";
 
-const Score = () => {
+const Score = (props) => {
+  const { score } = props;
   return (
     <ScoreConsumer>
       {(value) => {
         if (value.win === false) {
-          return <h2>Matches: {value.score}</h2>;
+          return <h2>Matches: {score}</h2>;
         } else {
           return (
             <div>
