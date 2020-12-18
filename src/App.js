@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Score from "./components/Score";
 import { Board } from "./components/Board";
 import "./styles.css";
@@ -56,6 +56,20 @@ export default function App() {
   const [score, setScore] = useState(
     cards.filter((card) => card.status === CARD_STATE.MATCHED).length / 2
   );
+
+  const checkMatch = (selectedCards) => {
+    return selectedCards[0].name === selectedCards[1].name;
+  };
+
+  useEffect(() => {
+    let selectedCards = cards.filter(
+      (card) => card.status === CARD_STATE.FACEUP
+    );
+
+    if (selectedCards.length === 2) {
+      console.log(checkMatch(selectedCards));
+    }
+  }, [cards]);
 
   return (
     <div className="App" key={appKey}>
