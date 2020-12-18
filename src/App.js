@@ -49,6 +49,32 @@ export default function App() {
     setCards(updatedCards);
   };
 
+  const flipCardDown = () => {
+    let updatedCards = cards.map((card) => {
+      if (card.status === CARD_STATE.FACEUP) {
+        card.status = CARD_STATE.FACEDOWN;
+        card.showingImg = CARD_IMG.BACK;
+        return card;
+      }
+      return card;
+    });
+
+    setCards(updatedCards);
+  };
+
+  const matchCards = () => {
+    let updatedCards = cards.map((card) => {
+      if (card.status === CARD_STATE.FACEUP) {
+        card.status = CARD_STATE.MATCHED;
+        card.showingImg = CARD_IMG.BLANK;
+        return card;
+      }
+      return card;
+    });
+
+    setCards(updatedCards);
+  };
+
   const [cards, setCards] = useState(makeCards(CARD_DATA));
 
   console.log("cards", cards);
@@ -67,9 +93,16 @@ export default function App() {
     );
 
     if (selectedCards.length === 2) {
-      console.log(checkMatch(selectedCards));
+      console.log(selectedCards);
+      if (checkMatch(selectedCards) === false) {
+        flipCardDown();
+        selectedCards = [];
+      } else {
+        matchCards();
+        selectedCards = [];
+      }
     }
-  }, [cards]);
+  }, [cards, flipCardDown]);
 
   return (
     <div className="App" key={appKey}>
