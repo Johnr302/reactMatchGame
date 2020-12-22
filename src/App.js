@@ -79,9 +79,7 @@ export default function App() {
 
   console.log("cards", cards);
 
-  const [score, setScore] = useState(
-    cards.filter((card) => card.status === CARD_STATE.MATCHED).length / 2
-  );
+  const [score, setScore] = useState(0);
 
   const checkMatch = (selectedCards) => {
     return selectedCards[0].name === selectedCards[1].name;
@@ -103,6 +101,12 @@ export default function App() {
       }
     }
   }, [cards, flipCardDown]);
+
+  useEffect(() => {
+    setScore(
+      cards.filter((card) => card.status === CARD_STATE.MATCHED).length / 2
+    );
+  }, [cards]);
 
   return (
     <div className="App" key={appKey}>
