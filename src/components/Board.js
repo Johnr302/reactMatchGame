@@ -5,7 +5,7 @@ import { ScoreConsumer } from "../scoreContext";
 import "./board.css";
 
 const Board = (props) => {
-  const { cards, flipCardClickHandler } = props;
+  const { cards, flipCardClickHandler, disableFlip } = props;
 
   return (
     <ScoreConsumer>
@@ -23,6 +23,7 @@ const Board = (props) => {
                   imgSrc={card.showingImg}
                   flipCardClickHandler={flipCardClickHandler}
                   status={card.status}
+                  disableFlip={disableFlip}
                 />
               );
             })}

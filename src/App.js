@@ -27,13 +27,8 @@ const makeCards = (data) => {
 };
 
 export default function App() {
-  const [win, setWin] = useState(false);
-  const [isGameInitialized, setIsGameInitialized] = useState(false);
   const [appKey, setAppKey] = useState(0);
-  const [matchesArray, setMatchesArray] = useState([]);
-
-  //New code
-  const [shuffledCards, setShuffledCards] = useState();
+  const [disableFlip, setDisableFlip] = useState(false);
 
   // New code
   const flipCardClickHandler = (event, id) => {
@@ -58,7 +53,6 @@ export default function App() {
       }
       return card;
     });
-
     setCards(updatedCards);
   };
 
@@ -91,14 +85,17 @@ export default function App() {
     );
 
     if (selectedCards.length === 2) {
+      setDisableFlip(true);
       console.log(selectedCards);
-      if (checkMatch(selectedCards) === false) {
-        flipCardDown();
+      setTimeout(() => {
+        if (checkMatch(selectedCards) === false) {
+          flipCardDown();
+        } else {
+          matchCards();
+        }
         selectedCards = [];
-      } else {
-        matchCards();
-        selectedCards = [];
-      }
+        setDisableFlip(false);
+      }, 1000);
     }
   }, [cards, flipCardDown]);
 
@@ -111,33 +108,13 @@ export default function App() {
   return (
     <div className="App" key={appKey}>
       <h1>Memory Game</h1>
-      <ScoreProvider
-        value={{
-          score: score,
-          updateScore: () => {
-            let updatedScore = score + 1;
-            setScore(updatedScore);
-          },
-          updateMatchesArray: (val) => {
-            setMatchesArray((prevVal) => {
-              return [...prevVal, val];
-            });
-          },
-          win: win,
-          resetGame: () => {
-            setAppKey(appKey + 1);
-            setWin(false);
-            setScore(0);
-            setMatchesArray([]);
-          },
-          matchesArray: matchesArray,
-          isGameInitialized: isGameInitialized,
-          setIsGameInitialized: setIsGameInitialized,
-        }}
-      >
-        <Score score={score} />
-        <Board cards={cards} flipCardClickHandler={flipCardClickHandler} />
-      </ScoreProvider>
+
+      <Score score={score} />
+      <Board
+        cards={cards}
+        flipCardClickHandler={flipCardClickHandler}
+        disableFlip={disableFlip}
+      />
     </div>
   );
 }

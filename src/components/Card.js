@@ -64,25 +64,19 @@ const flipCard = (event, value) => {
 };
 
 const Card = (props) => {
-  const { id, flipCardClickHandler, imgSrc, status } = props;
+  const { id, flipCardClickHandler, imgSrc, status, disableFlip } = props;
 
   return (
-    <ScoreConsumer>
-      {(value) => {
-        return (
-          <img
-            src={imgSrc}
-            className="card-container"
-            alt=""
-            onClick={
-              status === CARD_STATE.FACEDOWN
-                ? (event) => flipCardClickHandler(event, id)
-                : undefined
-            }
-          />
-        );
-      }}
-    </ScoreConsumer>
+    <img
+      src={imgSrc}
+      className="card-container"
+      alt=""
+      onClick={
+        status === CARD_STATE.FACEDOWN && disableFlip === false
+          ? (event) => flipCardClickHandler(event, id)
+          : undefined
+      }
+    />
   );
 };
 
