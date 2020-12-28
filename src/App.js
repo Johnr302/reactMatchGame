@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Score from "./components/Score";
 import { Board } from "./components/Board";
 import "./styles.css";
-import { ScoreProvider } from "./scoreContext";
 import { CARD_STATE, CARD_DATA, CARD_IMG } from "./card-constants";
 import { nanoid } from "nanoid";
 import randomizeArray from "./helpers/randomizeArray";

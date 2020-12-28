@@ -1,36 +1,25 @@
 import React from "react";
 import { Card } from "./Card.js";
-import { ScoreConsumer } from "../scoreContext";
-
 import "./board.css";
 
 const Board = (props) => {
   const { cards, flipCardClickHandler, disableFlip } = props;
 
   return (
-    <ScoreConsumer>
-      {(value) => {
+    <section id="board">
+      {cards.map((card, index) => {
         return (
-          <section id="board">
-            {/* {value.win
-              ? (cards.current = makeCards(data, flipCardClickHandler))
-              : cards.current} */}
-            {cards.map((card, index) => {
-              return (
-                <Card
-                  key={index.toString()}
-                  id={card.id}
-                  imgSrc={card.showingImg}
-                  flipCardClickHandler={flipCardClickHandler}
-                  status={card.status}
-                  disableFlip={disableFlip}
-                />
-              );
-            })}
-          </section>
+          <Card
+            key={index.toString()}
+            id={card.id}
+            imgSrc={card.showingImg}
+            flipCardClickHandler={flipCardClickHandler}
+            status={card.status}
+            disableFlip={disableFlip}
+          />
         );
-      }}
-    </ScoreConsumer>
+      })}
+    </section>
   );
 };
 
