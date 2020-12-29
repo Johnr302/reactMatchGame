@@ -33,9 +33,11 @@ export default function App() {
   const flipCardClickHandler = (event, id) => {
     let updatedCards = cards.map((card) => {
       if (card.id === id) {
-        card.status = CARD_STATE.FACEUP;
-        card.showingImg = card.frontImg;
-        return card;
+        return {
+          ...card,
+          status: CARD_STATE.FACEUP,
+          showingImg: card.frontImg,
+        };
       }
       return card;
     });
@@ -46,9 +48,11 @@ export default function App() {
   const flipCardDown = () => {
     let updatedCards = cards.map((card) => {
       if (card.status === CARD_STATE.FACEUP) {
-        card.status = CARD_STATE.FACEDOWN;
-        card.showingImg = CARD_IMG.BACK;
-        return card;
+        return {
+          ...card,
+          status: CARD_STATE.FACEDOWN,
+          showingImg: CARD_IMG.BACK,
+        };
       }
       return card;
     });
@@ -58,9 +62,11 @@ export default function App() {
   const matchCards = () => {
     let updatedCards = cards.map((card) => {
       if (card.status === CARD_STATE.FACEUP) {
-        card.status = CARD_STATE.MATCHED;
-        card.showingImg = CARD_IMG.BLANK;
-        return card;
+        return {
+          ...card,
+          status: CARD_STATE.MATCHED,
+          showingImg: CARD_IMG.BLANK,
+        };
       }
       return card;
     });
@@ -94,7 +100,7 @@ export default function App() {
         }
         selectedCards = [];
         setDisableFlip(false);
-      }, 1000);
+      }, 500);
     }
   }, [cards, flipCardDown]);
 
