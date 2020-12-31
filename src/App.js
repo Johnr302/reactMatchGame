@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Score from "./components/Score";
 import { Board } from "./components/Board";
+import GameOver from "./components/GameOver";
 import "./styles.css";
 import { CARD_STATE, CARD_DATA, CARD_IMG } from "./card-constants";
 import { nanoid } from "nanoid";
@@ -25,9 +26,18 @@ const makeCards = (data) => {
   return results;
 };
 
+
+
 export default function App() {
-  const [appKey, setAppKey] = useState(0);
   const [disableFlip, setDisableFlip] = useState(false);
+  const [cards, setCards] = useState(makeCards(CARD_DATA));
+  const [score, setScore] = useState(0);
+  const [gameOver, setGameOver] = useState(false)
+
+  const startOver = () => {
+    setGameOver(false)
+    setCards(makeCards(CARD_DATA))
+  }
 
   // New code
   const flipCardClickHandler = (event, id) => {
@@ -74,11 +84,6 @@ export default function App() {
     setCards(updatedCards);
   };
 
-  const [cards, setCards] = useState(makeCards(CARD_DATA));
-
-  console.log("cards", cards);
-
-  const [score, setScore] = useState(0);
 
   const checkMatch = (selectedCards) => {
     return selectedCards[0].name === selectedCards[1].name;
@@ -110,11 +115,18 @@ export default function App() {
     );
   }, [cards]);
 
+  useEffect(() => {
+    if (cards.every(card => card.status === CARD_STATE.MATCHED)) {
+      setGameOver(true)
+    }
+  }, [cards])
+
   return (
-    <div className="App" key={appKey}>
+    <div className="App">
       <h1>Memory Game</h1>
 
       <Score score={score} />
+      {gameOver ? <GameOver startOver={startOver} /> : ''}
       <Board
         cards={cards}
         flipCardClickHandler={flipCardClickHandler}
