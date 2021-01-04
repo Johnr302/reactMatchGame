@@ -5,6 +5,9 @@ import "./styles.css";
 import { CARD_STATE, CARD_DATA, CARD_IMG } from "./card-constants";
 import { nanoid } from "nanoid";
 import randomizeArray from "./helpers/randomizeArray";
+import GameOver from "./components/GameOver";
+import NewGame from "./components/NewGame";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 // makes number of cards passed in. Returns <Card /> component
 const makeCards = (data) => {
@@ -28,8 +31,13 @@ const makeCards = (data) => {
 export default function App() {
   const [appKey, setAppKey] = useState(0);
   const [disableFlip, setDisableFlip] = useState(false);
+  const [gameOver, setGameOver] = useState(false);
 
   // New code
+  const newGameClickHandler = () => {
+    setCards(makeCards(CARD_DATA));
+  };
+
   const flipCardClickHandler = (event, id) => {
     let updatedCards = cards.map((card) => {
       if (card.id === id) {
@@ -110,11 +118,21 @@ export default function App() {
     );
   }, [cards]);
 
+  useEffect(() => {
+    const matches = (currentValue) =>
+      currentValue.status === CARD_STATE.MATCHED;
+    if (cards.every(matches)) {
+      setGameOver(true);
+    }
+  }, [cards]);
+
   return (
     <div className="App" key={appKey}>
       <h1>Memory Game</h1>
 
       <Score score={score} />
+      {gameOver ? <GameOver /> : ""}
+      {gameOver ? <NewGame newGameClickHandler={newGameClickHandler} /> : ""}
       <Board
         cards={cards}
         flipCardClickHandler={flipCardClickHandler}
