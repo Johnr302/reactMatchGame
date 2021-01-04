@@ -36,6 +36,7 @@ export default function App() {
   // New code
   const newGameClickHandler = () => {
     setCards(makeCards(CARD_DATA));
+    setGameOver(false);
   };
 
   const flipCardClickHandler = (event, id) => {
