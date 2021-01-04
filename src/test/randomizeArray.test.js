@@ -1,4 +1,4 @@
-import randomizeArray from "../helperFunctions/randomizeArray";
+import randomizeArray from "../helpers/randomizeArray";
 
 test("creates an array of random numbers from 0 to one less than the number passed in", () => {
   let result = randomizeArray(3);
