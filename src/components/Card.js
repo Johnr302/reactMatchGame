@@ -5,7 +5,6 @@ import { CARD_STATE } from "../card-constants.js";
 const Card = (props) => {
   const { id, flipCardClickHandler, imgSrc, status, disableFlip } = props;
   const shouldFlip = status === CARD_STATE.FACEDOWN && disableFlip === false;
-
   return (
     <img
       src={imgSrc}
