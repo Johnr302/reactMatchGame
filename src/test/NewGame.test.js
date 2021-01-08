@@ -24,4 +24,9 @@ describe("<NewGame />", () => {
     wrapper.find(Button).simulate("click");
     expect(onClick).toHaveBeenCalled();
   });
+
+  it("has a button that text is New Game", () => {
+    const wrapper = mount(<NewGame />);
+    expect(wrapper.text()).toMatch("New Game");
+  });
 });
