@@ -10,7 +10,7 @@ import NewGame from "./components/NewGame";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 // makes number of cards passed in. Returns <Card /> component
-const makeCards = (data) => {
+export const makeCards = (data) => {
   let randomArray = randomizeArray(data.length);
 
   let results = randomArray.map((index) => {
