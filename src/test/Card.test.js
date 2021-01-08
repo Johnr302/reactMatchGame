@@ -1,8 +1,7 @@
 import React from "react";
-import Enzyme, { mount, render, fireEvent } from "enzyme";
-import { Card, isMatchFound } from "../components/Card";
+import Enzyme, { mount } from "enzyme";
+import { Card } from "../components/Card";
 import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
-import { CARD_STATE } from "../card-constants.js";
 
 Enzyme.configure({ adapter: new Adapter() });
 const index = 1;
@@ -17,6 +16,5 @@ describe("<Card />", () => {
     const wrapper = mount(<Card src={imgSrc} />);
     const props = wrapper.props();
     expect(props.src).toBe("testPath/img.png");
-
   });
 });

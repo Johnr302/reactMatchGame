@@ -14,7 +14,6 @@ describe("<NewGame />", () => {
 
   it("renders <NewGame /> component that has a button", () => {
     const wrapper = mount(<NewGame />);
-    console.log(wrapper.debug());
     expect(wrapper.find("Button")).toHaveLength(1);
   });
 
