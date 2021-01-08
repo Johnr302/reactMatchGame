@@ -12,7 +12,7 @@ describe("<App />", () => {
     expect(wrapper.find(App)).toHaveLength(1);
   });
 
-  it("generates a random array of cards", () => {
+  it("generates a random array of cards from CARD_DATA", () => {
     let result = makeCards(CARD_DATA);
     expect(result.length).toBe(12);
   });
