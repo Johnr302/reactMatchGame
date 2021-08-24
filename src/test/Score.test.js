@@ -3,7 +3,6 @@ import Enzyme, { mount } from "enzyme";
 
 import Score from "../components/Score";
 import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
-import { ScoreProvider } from "../scoreContext";
 
 Enzyme.configure({ adapter: new Adapter() });
 
